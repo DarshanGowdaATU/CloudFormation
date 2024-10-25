@@ -99,8 +99,22 @@ Resources:
           ToPort: 22
           SourceSecurityGroupId: !Ref PublicEC2SecurityGroup
 
-  # EC2 Instance in Public Subnet (Jump Box)
+  # EC2 Instance in Public Subnet
   PublicEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          SubnetId: !Ref PublicSubnet
+          DeviceIndex: 0
+          GroupSet:
+            - !Ref PublicEC2SecurityGroup
+      ImageId: ami-06b21ccaeff8cd686 
+
+# Additional Jump Box EC2 Instance in Public Subnet
+  AdditionalJumpBoxInstance:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
