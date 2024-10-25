@@ -142,9 +142,14 @@ Resources:
 
 Outputs:
   PublicInstance:
-    Description: Public EC2 instance (Jump Box) IP Address
+    Description: Public EC2 instance IP Address
     Value: !GetAtt PublicEC2Instance.PublicIp
 
   PrivateInstance:
     Description: Private EC2 instance IP Address
     Value: !GetAtt PrivateEC2Instance.PrivateIp
+
+  PublicInstanceInJumpBox:
+    Description: Public EC2 instance (Jump Box) IP Address
+    Value: !GetAtt AdditionalJumpBoxInstance.PublicIp
+
