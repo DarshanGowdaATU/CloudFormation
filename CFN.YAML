@@ -113,6 +113,22 @@ Resources:
             - !Ref PublicEC2SecurityGroup
       ImageId: ami-06b21ccaeff8cd686 
 
+ # IAM User for EC2 Access
+  IAMUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: JumpBoxUser
+      Policies:
+        - PolicyName: SSHAccessPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:DescribeInstances
+                  - ec2:Connect
+                Resource: '*'
+
 # Additional Jump Box EC2 Instance in Public Subnet
   AdditionalJumpBoxInstance:
     Type: AWS::EC2::Instance
